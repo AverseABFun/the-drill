@@ -1,0 +1,84 @@
+[gd_scene load_steps=8 format=3 uid="uid://c6nwt4s6lk4vi"]
+
+[ext_resource type="VideoStream" path="res://output.ogv" id="1_1uneo"]
+[ext_resource type="Shader" path="res://main.gdshader" id="1_fbk3j"]
+[ext_resource type="FontFile" uid="uid://cbhqw14cdf2ox" path="res://BergenMono-Regular.otf" id="2_0ftmd"]
+[ext_resource type="Script" path="res://Terminal.gd" id="2_jadry"]
+[ext_resource type="Script" path="res://Shader.gd" id="4_l0fgm"]
+[ext_resource type="AudioStream" uid="uid://qn7yh772bi6j" path="res://gride-25460.mp3" id="6_a03ug"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0axva"]
+shader = ExtResource("1_fbk3j")
+shader_parameter/scanline_count = 1000.0
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Jumpscare" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Jumpscare"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("1_1uneo")
+volume_db = -80.0
+autoplay = true
+expand = true
+loop = true
+
+[node name="Terminal" type="TextEdit" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_0ftmd")
+context_menu_enabled = false
+shortcut_keys_enabled = false
+selecting_enabled = false
+drag_and_drop_selection_enabled = false
+middle_mouse_paste_enabled = false
+wrap_mode = 1
+caret_type = 1
+caret_blink = true
+caret_draw_when_editable_disabled = true
+caret_multiple = false
+script = ExtResource("2_jadry")
+
+[node name="Post-Processing" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="Shader" type="ColorRect" parent="Post-Processing"]
+material = SubResource("ShaderMaterial_0axva")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4_l0fgm")
+
+[node name="Scratching" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_a03ug")
+volume_db = 6.559
+pitch_scale = 0.5
+mix_target = 2
