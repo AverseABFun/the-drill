@@ -498,7 +498,7 @@ var day = 1
 func _ready():
 	grab_focus()
 	set_caret_column(2, true, 0)
-	insert_text_at_caret("The Colony version {}\n".replace("{}", Constants.VERSION).to_upper(), 0)
+	insert_text_at_caret("The Drill version {}\n".replace("{}", Constants.VERSION).to_upper(), 0)
 	insert_text_at_caret("Hint: words in exclamation marks !LIKE THESE! mean they are a command that you can run\nAlso, you can run !SHADER! to toggle on and off the shader.\n".to_upper(), 0)
 	insert_text_at_caret("You have just woken up in a train station with your neck and head hurting, and after sleeping on a bench after your ticket declined and Dr. Madd told you you had to wait until the morning, who can blame you? Okay, okay, let me back up. Your life has been sad and lonely, until you met Dr. A.M. Madd. He saw something in you, and let you be a part of a privlidged underground facility meant to help further the study of the Earth. The hours are not great, and you will be living alone for weeks-months at a time, but the pay is amazing. If you do well for just the first 4 days, you will have enough money to pursue your interest in extreme ironing. You will even have enough money to hold out until your dreams pay off, as long as you don't stress eat 5 pounds of spaghetti in one sitting, which you have been known to do.\n\
 You should probably !GO NORTH! to the ticket booth and !GIVE YOUR TICKET!\n> ".to_upper(), 0)
@@ -531,6 +531,7 @@ func parseInput():
 				break
 		i += 1
 	print(newParsedInput)
+	parsedInput = newParsedInput
 	await get_tree().create_timer(1).timeout
 	for word in parsedInput:
 		if word in commands.keys():
@@ -545,5 +546,3 @@ func parseInput():
 	print(realText)
 	insert_text_at_caret("\n> ", 0)
 	oldText = text
-
-
