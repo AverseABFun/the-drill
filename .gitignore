@@ -1,2 +1,5 @@
 # Godot 4+ specific ignores
 .godot/
+
+# exports are too big and should only be in releases
+export/
